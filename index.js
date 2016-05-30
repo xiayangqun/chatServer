@@ -11,24 +11,17 @@ var webSocketServer=ws.createServer({
 webSocketServer.on("connection",function(connectHandle) {
     
     connectHandle.on("message",function(data) {
-        
-        //console.log('we get data from client: ' + data);
 
-        var commend="chat";
         var clientData=JSON.parse(data);
-        var serverData={
-            time: Date.parse(new Date())/1000 ,
-            world:  'we recvied data :'+clientData.world,
-        };
-        var responseData={
-            clientData:clientData,
-            serverData:serverData,
-            commend:commend
-        };
-        connectHandle.send(JSON.stringify(responseData)) ;
+        var commend=clientData.commend;
+        webSocketServer.emit(commend ,  commend,  clientData,  connectHandle,  webSocketServer.clients )
+
     })
 
     connectHandle.on("close",function(connectHandle){
-
+        //donothing!!
     })
 })
+
+webSocketServer.on("chat", require("./onChat"));
+
