@@ -2,7 +2,7 @@
 
 /// <reference path="onChat.js" />
 
-var ws=require('ws')
+var ws=require('ws');
 
 var webSocketServer=ws.createServer({
     host:"127.0.0.1",
@@ -17,10 +17,10 @@ webSocketServer.on("connection",function(connectHandle) {
         var commend=clientData.commend;
         webSocketServer.emit(commend ,  commend,  clientData,  connectHandle,  webSocketServer.clients )
 
-    })
+    });
 
     connectHandle.on("close",function(connectHandle){
-        //donothing!!
+        //do nothing!!
     })
 })
 
